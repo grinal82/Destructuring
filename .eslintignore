@@ -1,0 +1,7 @@
+dist
+
+webpack.config.js
+
+src/__tests__/
+
+coverage/
