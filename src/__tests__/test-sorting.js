@@ -1,7 +1,4 @@
-// import { orderByProps } from "..js/sorting.js";
-
 const orderByProps = require("../js/sorting");
-
 
 describe("orderByProps", () => {
     it("returns an array of object properties sorted by order array and alphabetically", () => {
@@ -82,4 +79,3 @@ describe("orderByProps", () => {
         );
     });
 });
-

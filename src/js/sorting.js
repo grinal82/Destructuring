@@ -5,46 +5,16 @@ function orderByProps(obj, sortKeys) {
     if (!Array.isArray(sortKeys)) {
         throw new Error("The second argument must be an array");
     }
-    const resultArr = [];
-    const sortedObj = {};
-
-    // Сортировка объекта по заданному порядку
-    for (const prop of sortKeys) {
-        if (obj.hasOwnProperty(prop)) {
-            sortedObj[prop] = obj[prop];
-        }
-    }
-
-    // Сортировка оставшихся свойств в алфавитном порядке
-    const otherProps = Object.keys(obj)
-        .filter((prop) => !sortKeys.includes(prop))
-        .sort();
-    for (const prop of otherProps) {
-        sortedObj[prop] = obj[prop];
-    }
-
-    // Преобразование отсортированного объекта в массив объектов
-    for (const key in sortedObj) {
-        resultArr.push({ key, value: sortedObj[key] });
-    }
-
-    return resultArr;
+    /* Получаем список ключей */
+    const keys = Object.keys(obj);
+    /* Отфильтровываем ключи,которые не нужно сортировать */
+    const filteredKeys = keys.filter((key) => !sortKeys.includes(key));
+    /* Объединяем ключи, кот нужно сортировать и
+которые не нужно сортировать методом 'concat' */
+    const sortedKeys = sortKeys.concat(filteredKeys.sort());
+    /* с помощью Array.prototype.map и создадим массив объектов с ключами и их значениями */
+    const result = sortedKeys.map((key) => ({ key, value: obj[key] }));
+    return result;
 }
-
-/* Simple test of functionality */
-// console.log(
-//     orderByProps(
-//         {
-//             name: "мечник",
-//             health: 10,
-//             level: 2,
-//             attack: 80,
-//             defence: 40,
-//         },
-//         ["name", "level"]
-//     )
-// );
-
-
 
 module.exports = orderByProps;
